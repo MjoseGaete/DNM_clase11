@@ -51,7 +51,7 @@
         </aside>
         <!-- El pie de página-->
         <footer class="py-4 text-white">
-            <div class="container px-5"><p class="text-center small">Nombre Apellido &copy; 2023</p></div>
+            <div class="container px-5"><p class="text-center small">María José Gaete &copy; 2023</p></div>
         </footer>
         <!-- Lo que sigue es JavaScript a secas-->
         <script>
@@ -65,20 +65,16 @@
                 const data = await consulta.json();
                 const cuantos = data.length;
                 //Como n es siempre número: Ya no tengo posibilidad de null
-                document.querySelector("#trabajos").innerHTML = '<div class="col"><h2 class="fs-1">' + data[n].nombre + "</a></h2><p>" + data[n].texto + "</p><small>#" + data[n].soporte + "</small></div>";
-                //un forEach para cada foto del trabajo
-                data[n].fotos.forEach((x) => {
-                    document.querySelector("#trabajos").innerHTML += '<div class="col"><img src="' + x + '" class="w-100 rounded shadow-sm"></div>';
+                document.querySelector("#trabajos").innerHTML = `<div class="col"><h2 class="fs-1">${data[n].nombre}</h2><p>${data[n].texto}</p><small>#${data[n].soporte}</small></div>`;
+                // Un forEach para cada foto del trabajo
+                    data[n].fotos.forEach((x) => {document.querySelector("#trabajos").innerHTML += `<div class="col"><img src="${x}" class="w-100 rounded shadow-sm"></div>`;
                 });
                 //Necesito una condición para pasar a trabajo anterior o siguiente si lo hubiera
-                if (n < 1) {
-                    document.querySelector("#next").innerHTML = '<a href="single.html?nro=' + (n + 1) + '" class="btn btn-sm btn-outline-secondary">siguiente &rarr;</a>';
-                } else if (n > 0 && n < cuantos - 1) {
-                    document.querySelector("#back").innerHTML = '<a href="single.html?nro=' + (n - 1) + '" class="btn btn-sm btn-outline-secondary">&larr; anterior</a>';
-                    document.querySelector("#next").innerHTML = '<a href="single.html?nro=' + (n + 1) + '" class="btn btn-sm btn-outline-secondary">siguiente &rarr;</a>';
-                } else {
-                    document.querySelector("#back").innerHTML = '<a href="single.html?nro=' + (n - 1) + '" class="btn btn-sm btn-outline-secondary">&larr; anterior</a>';
-                }
+                if (n < 1) {document.querySelector("#next").innerHTML = `<a href="single.html?nro=${n + 1}" class="btn btn-sm btn-outline-secondary">siguiente &rarr;</a>`;
+                } else if (n > 0 && n < cuantos - 1) {document.querySelector("#back").innerHTML = `<a href="single.html?nro=${n - 1}" class="btn btn-sm btn-outline-secondary">&larr; anterior</a>`;
+                    document.querySelector("#next").innerHTML = `<a href="single.html?nro=${n + 1}" class="btn btn-sm btn-outline-secondary">siguiente &rarr;</a>`;
+                } else {document.querySelector("#back").innerHTML = `<a href="single.html?nro=${n - 1}" class="btn btn-sm btn-outline-secondary">&larr; anterior</a>`;
+            }
             } //ahora cierro la creación de la función asincrónica
             portfolio().catch((error) => console.error(error));
         </script>
